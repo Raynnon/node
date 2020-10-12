@@ -1,14 +1,11 @@
-const http = require('http');
+const express = require('express');
 
-const server = http.createServer((request, response) => {
-    console.log('url', request.url);
-    const user = {
-        name: 'John',
-        hobby: 'skating'
-    }
+const app = express();
 
-    response.setHeader('Content-Type', 'application/json');
-    response.end(JSON.stringify(user));
-})
+app.use(express.urlencoded({extended: false}));
+app.use(express.json());
 
-server.listen(3000);
+app.use(express.static(__dirname + '/public'));
+
+
+app.listen(3000);
